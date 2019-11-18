@@ -15,6 +15,8 @@
  **/
 
 import Foundation
+import Socket
+import SSLService
 
 // MARK: Redis
 
@@ -39,8 +41,8 @@ public class Redis {
     /// - Parameter host: the server IP address.
     /// - Parameter port: port number.
     /// - Parameter callback: callback function for on completion, NSError will be nil if successful.
-    public func connect(host: String, port: Int32, callback: (NSError?) -> Void) {
-        respHandle = RedisResp(host: host, port: port)
+    public func connect(host: String, port: Int32, sslConfig: SSLService.Configuration? = nil, callback: (NSError?) -> Void) {
+        respHandle = RedisResp(host: host, port: port, sslConfig: sslConfig)
 
         if respHandle?.status == .notConnected {
             callback(createError("Failed to connect to Redis server", code: 2))

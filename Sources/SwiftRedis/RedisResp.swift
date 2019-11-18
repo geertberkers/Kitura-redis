@@ -42,9 +42,11 @@ class RedisResp {
         return socket?.isConnected == true ? .connected : .notConnected
     }
 
-    init(host: String, port: Int32) {
+    init(host: String, port: Int32, sslConfig: SSLService.Configuration? = nil) {
         socket = try? Socket.create()
-        socket?.delegate = try? SSLService(usingConfiguration: SSLService.Configuration())
+        if let sslConfig = sslConfig {
+            socket?.delegate = try? SSLService(usingConfiguration: sslConfig)
+        }
         try? socket?.connect(to: host, port: port)
     }
 
