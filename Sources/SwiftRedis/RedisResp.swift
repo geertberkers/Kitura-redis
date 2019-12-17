@@ -17,6 +17,7 @@
 import Socket
 import Foundation
 import SSLService
+import LoggerAPI
 
 enum RedisRespStatus {
     case notConnected
@@ -67,6 +68,7 @@ class RedisResp {
 
             readAndParseResponse(callback: callback)
         } catch let error as Socket.Error {
+            Log.error("Error sending command to Redis server. Error=\(error.description)")
             callback(RedisResponse.Error("Error sending command to Redis server. Error=\(error.description)"))
         } catch {
             callback(RedisResponse.Error("Error sending command to Redis server. Unknown error"))

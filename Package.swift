@@ -30,6 +30,7 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
+        .package(url: "https://github.com/IBM-Swift/HeliumLogger.git", from: "1.7.1"),
         .package(url: "https://github.com/IBM-Swift/BlueSocket.git", from: "1.0.0"),
         .package(url: "https://github.com/IBM-Swift/BlueSSLService.git", from: "1.0.50")
     ],
@@ -38,7 +39,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "SwiftRedis",
-            dependencies: ["Socket", "SSLService"]),
+            dependencies: ["Socket", "SSLService", "LoggerAPI"]),
         .testTarget(
             name: "SwiftRedisTests",
             dependencies: ["SwiftRedis"]),

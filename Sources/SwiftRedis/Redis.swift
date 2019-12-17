@@ -17,7 +17,7 @@
 import Foundation
 import Socket
 import SSLService
-
+import LoggerAPI
 // MARK: Redis
 
 /// The `Redis` class represents a handle for issueing commands to a Redis server.
@@ -45,6 +45,7 @@ public class Redis {
         respHandle = RedisResp(host: host, port: port, sslConfig: sslConfig)
 
         if respHandle?.status == .notConnected {
+            Log.error("Failed to connect to Redis server")
             callback(createError("Failed to connect to Redis server", code: 2))
         } else {
             callback(nil)
